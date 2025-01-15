@@ -1,0 +1,856 @@
+
+
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheSheep的博客</title>
+    <meta name='description' content='一个极致的极简风博客，文章字数也少得可怜...'>
+    <link rel="icon" href="https://creatorspace.imgix.net/users/cm5tl7a7y01jfre014pvpcgx1/phcNVZWIBk4tWtqg-thssheep.jpg" type="image/png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+            min-height: 100vh; /* 让容器高度至少为视口高度 */
+            background: #C9D6FF;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #E2E2E2, #C9D6FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+            position: relative; /* 使版权提示绝对定位 */
+        }
+        /* From Uiverse.io by CYBWEBALI */ 
+.btnrr {
+  display: grid;
+  place-items: center;
+  background: #e3edf7;
+  padding: 1.4em;
+  border-radius: 10px;
+  box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15);
+  border: 1px solid rgba(0,0,0,0);
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+.btnrr:hover {
+  box-shadow: inset 4px 4px 6px -1px rgba(0,0,0,0.2),
+	      inset -4px -4px 6px -1px rgba(255,255,255,0.7),
+	      -0.5px -0.5px 0px rgba(255,255,255,1),
+	      0.5px 0.5px 0px rgba(0,0,0,0.15),
+	      0px 12px 10px -10px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.1);
+  transform: translateY(0.5em);
+}
+
+.btnrr svg {
+  transition: transform 0.5s;
+}
+
+.btnrr:hover svg {
+  transform: scale(0.9);
+  fill: #333333;
+}
+
+  .top-right {
+            position: absolute; /* 绝对定位 */
+            top: 10px; /* 距离顶部10像素 */
+            right: 10px; /* 距离右侧10像素 */
+            padding: 10px; /* 内边距 */
+        }
+  /* 自定义右键菜单样式 */
+        .custom-context-menu {
+            display: none; /* 默认隐藏 */
+            position: absolute;
+            background-color: white;
+            border-radius: 8px; /* 圆角 */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* 阴影 */
+            z-index: 1000;
+            padding: 10px;
+            list-style: none; /* 去掉列表样式 */
+        }
+
+        .custom-context-menu li {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .custom-context-menu li:hover {
+            background-color: #f0f0f0; /* 悬停效果 */
+        }
+        .container {
+            display: flex; /* 使用 Flexbox 布局 */
+            align-items: flex-start; /* 左侧内容区顶部对齐 */
+            width: 90%; /* 容器宽度 */
+            max-width: 1200px; /* 最大宽度 */
+            position: relative; /* 使右侧内容区绝对定位 */
+            animation: slide-up 0.5s ease; /* 加入卡片出现动画 */
+            top: 60px; /* 距离顶部60px */
+            opacity: 1; /* 初始透明度为1 */
+        }
+        
+        @keyframes slide-up {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .left-content {
+            flex: 1; /* 左侧内容区占据剩余空间 */
+            margin-right: 20px; /* 右边距 */
+            position: relative; /* 使左侧内容区相对定位 */
+        }
+
+        .circle-card {
+            border-radius: 50%; /* 圆形 */
+            background: #F2F2F2;
+            
+            width: 250px;
+            height: 250px;
+            overflow: hidden; /* 隐藏超出部分 */
+            display: flex; /* 使用 Flexbox 来居中内容 */
+            justify-content: center; /* 水平居中内容 */
+            align-items: center; /* 垂直居中内容 */
+            position: relative; /* 改为相对定位 */
+            margin: 0 auto; /* 水平居中 */
+            top: 0px; /* 距离顶部60px */
+            transition: transform 0.3s ease; /* 添加缩放效果 */
+        }
+        
+        .circle-card img {
+            width: 100%; /* 图片宽度100% */
+            height: 100%; /* 图片高度100% */
+            object-fit: cover; /* 保持图片比例并填充 */
+            border-radius: 50%; /* 图片圆形 */
+            transition: transform 0.6s ease; /* 修改为更慢的旋转效果 */
+        }
+        
+        .circle-card:hover img {
+            transform: rotate(360deg); /* 悬停时旋转图片 */
+        }
+        .cardd {
+            z-index: 9999;
+            border-radius: 8px; /* 卡片圆角 */
+            background: #509AF8;
+            box-shadow: inset 25px 25px 50px #4483d3;
+            margin-bottom: 20px; /* 卡片底部间距 */
+            padding: 20px;
+            display: flex; /* 使用 Flexbox 来居中内容 */
+            flex-direction: column; /* 纵向排列内容 */
+            justify-content: center; /* 水平居中内容 */
+            align-items: center; /* 垂直居中内容 */
+            height: 150px; /* 设置卡片高度 */
+            transition: transform 0.3s ease; /* 添加缩放效果 */
+            text-align: center; /* 添加此行以使文字居中 */
+                   color: #fff;
+        }
+        .card {
+            border-radius: 8px; /* 卡片圆角 */
+            background: #E9E9E9;
+            box-shadow: 25px 25px 50px #c6c6c6;
+            margin-bottom: 26px; /* 卡片底部间距 */
+            padding: 20px;
+            display: flex; /* 使用 Flexbox 来居中内容 */
+            flex-direction: column; /* 纵向排列内容 */
+            justify-content: center; /* 水平居中内容 */
+            align-items: center; /* 垂直居中内容 */
+            height: 150px; /* 设置卡片高度 */
+            transition: transform 0.3s ease; /* 添加缩放效果 */
+            text-align: center; /* 添加此行以使文字居中 */
+     
+        }
+
+        .card-title, .card-content {
+            transition: font-size 0.3s ease; /* 添加字体大小变化的过渡效果 */
+        }
+        
+        .card:hover .card-title {
+            font-size: 1.5em; /* 悬停时标题放大 */
+        }
+        
+        .card:hover .card-content {
+            font-size: 1.1em; /* 悬停时正文放大 */
+        }
+        
+        .right-content {
+            text-align: center; /* 文字居中 */
+            margin-left: 20px; /* 左边距 */
+        }
+        
+        .card-title {
+            font-size: 1.5em; /* 标题字体大小 */
+            margin-bottom: 5px; /* 标题底部间距 */
+        }
+        
+        .card-content {
+            font-size: 0.9em; /* 正文字体大小 */
+        }
+        
+        .footer {
+            position: fixed; /* 固定定位 */
+            bottom: 0; /* 靠底部 */
+            left: 0; /* 靠左 */
+            right: 0; /* 靠右 */
+            color: #EBEBEB;
+            text-align: center; /* 文字居中 */
+            padding: 10px; /* 内边距 */
+            font-size: 0.3em; /* 字体大小 */
+        }
+        
+        a {
+            text-decoration: none; /* 去除下划线 */
+            color: inherit; /* 保留原来的颜色 */
+        }
+        
+        @media (max-width: 768px) {
+            .circle-card {
+                width: 200px; /* 手机上头像大小 */
+                height: 200px;
+            }
+            .card {
+                height: 120px; /* 手机上卡片高度 */
+            }
+        }
+        
+        .modal {
+            display: none; /* 默认隐藏 */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+            animation: fadeIn 0.5s; /* 添加弹窗出现动画 */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        /* From Uiverse.io by Yaya12085 */ 
+.cardee {
+    margin: 15% auto;
+            padding: 20px;
+  max-width: 350px;
+  border-width: 1px;
+  border-color: rgba(219, 234, 254, 1);
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 1);
+ 
+}
+
+.headerr {
+  display: flex;
+  align-items: center;
+  grid-gap: 1rem;
+  gap: 1rem;
+}
+
+.icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: rgba(96, 165, 250, 1);
+  padding: 0.5rem;
+  color: rgba(255, 255, 255, 1);
+}
+
+.icon svg {
+  height: 1rem;
+  width: 1rem;
+}
+
+.alert {
+  font-weight: 600;
+  color: rgba(107, 114, 128, 1);
+}
+
+.message {
+  margin-top: 1rem;
+  color: rgba(107, 114, 128, 1);
+}
+
+.actions {
+  margin-top: 1.5rem;
+}
+
+.actions a {
+  text-decoration: none;
+}
+
+.mark-as-read, .read {
+  display: inline-block;
+  border-radius: 0.5rem;
+  width: 70%;
+  padding: 0.75rem 1.25rem;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+.read {
+  background-color: rgba(59, 130, 246, 1);
+  color: rgba(255, 255, 255, 1);
+}
+
+.mark-as-read {
+  margin-top: 0.5rem;
+  background-color: rgba(249, 250, 251, 1);
+  color: rgba(107, 114, 128, 1);
+  transition: all .15s ease;
+}
+
+.mark-as-read:hover {
+  background-color: rgb(230, 231, 233);
+}
+.info {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            width: 320px;
+            padding: 12px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: start;
+            background: #509AF8;
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px -3px #111;
+            position: fixed;
+            top: -100px; /* 初始位置在视口外 */
+            left: 50%;
+            transform: translateX(-50%);
+            transition: top 0.5s; /* 动画效果 */
+            z-index: 1000; /* 确保提示框在最上层 */
+        }
+
+        .info__icon {
+            width: 20px;
+            height: 20px;
+            transform: translateY(-2px);
+            margin-right: 8px;
+        }
+
+        .info__title {
+            font-weight: 500;
+            font-size: 14px;
+            color: #fff;
+            flex-grow: 1;
+        }
+
+        .info__close {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-left: auto;
+        }
+        .containerrr {
+    display: flex; /* 使用 Flexbox 来排列卡片 */
+    justify-content: space-between; /* 在同一行中分开卡片 */
+    margin-bottom: 20px; /* 卡片底部间距 */
+}
+
+.carddd {
+    border-radius: 8px; /* 卡片圆角 */
+    backdrop-filter: blur(3px) saturate(200%);
+  -webkit-backdrop-filter: blur(3px) saturate(200%);
+  background-color: rgba(255,255,255,0.18);
+    box-shadow: 25px 25px 50px #C9D6FF;
+    padding: 20px;
+    flex: 1; /* 每个卡片占据相同的空间 */
+    margin: 0 10px; /* 卡片之间的间距 */
+    display: flex; /* 使用 Flexbox 来居中内容 */
+    flex-direction: column; /* 纵向排列内容 */
+    justify-content: center; /* 水平居中内容 */
+    align-items: center; /* 垂直居中内容 */
+    height: 150px; /* 设置卡片高度 */
+    transition: transform 0.3s ease; /* 添加缩放效果 */
+    text-align: center; /* 添加此行以使文字居中 */
+}
+
+.carddd-title, .carddd-content {
+    transition: font-size 0.3s ease; /* 添加字体大小变化的过渡效果 */
+}
+
+.carddd:hover .card-title {
+    font-size: 1.5em; /* 悬停时标题放大 */
+}
+
+.carddd:hover .carddd-content {
+    font-size: 1.1em; /* 悬停时正文放大 */
+}
+
+.carddd-title {
+    font-size: 2em; /* 标题字体大小 */
+    margin-bottom: 5px; /* 标题底部间距 */
+}
+
+.carddd-content {
+    font-size: 0.9em; /* 正文字体大小 */
+}
+/* From Uiverse.io by Nawsome */ 
+@keyframes clockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes counter-clockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+.gearbox {
+  background: #111;
+  height: 150px;
+  width: 100%;
+  margin-bottom: 26px;
+  position: relative;
+  border: none;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.1);
+}
+
+.gearbox .overlay {
+  border-radius: 6px;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  box-shadow: inset 0px 0px 20px black;
+  transition: background 0.2s;
+}
+
+.gearbox .overlay {
+  background: transparent;
+}
+
+.gear {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  box-shadow: 0px -1px 0px 0px #888888, 0px 1px 0px 0px black;
+  border-radius: 30px;
+}
+
+.gear.large {
+  height: 120px;
+  width: 120px;
+  border-radius: 60px;
+}
+
+.gear.large:after {
+  height: 96px;
+  width: 96px;
+  border-radius: 48px;
+  margin-left: -48px;
+  margin-top: -48px;
+}
+
+.gear.one {
+  top: 12px;
+  left: 10px;
+}
+
+.gear.two {
+  top: 61px;
+  left: 60px;
+}
+
+.gear.three {
+  top: 110px;
+  left: 10px;
+}
+
+.gear.four {
+  top: 13px;
+  left: 128px;
+}
+
+.gear:after {
+  content: "";
+  position: absolute;
+  height: 36px;
+  width: 36px;
+  border-radius: 36px;
+  background: #111;
+  top: 50%;
+  left: 50%;
+  margin-left: -18px;
+  margin-top: -18px;
+  z-index: 3;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1), inset 0px 0px 10px rgba(0, 0, 0, 0.1), inset 0px 2px 0px 0px #090909, inset 0px -1px 0px 0px #888888;
+}
+
+.gear-inner {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background: #555;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.large .gear-inner {
+  border-radius: 60px;
+}
+
+.gear.one .gear-inner {
+  animation: counter-clockwise 3s infinite linear;
+}
+
+.gear.two .gear-inner {
+  animation: clockwise 3s infinite linear;
+}
+
+.gear.three .gear-inner {
+  animation: counter-clockwise 3s infinite linear;
+}
+
+.gear.four .gear-inner {
+  animation: counter-clockwise 6s infinite linear;
+}
+
+.gear-inner .bar {
+  background: #555;
+  height: 16px;
+  width: 76px;
+  position: absolute;
+  left: 50%;
+  margin-left: -38px;
+  top: 50%;
+  margin-top: -8px;
+  border-radius: 2px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.large .gear-inner .bar {
+  margin-left: -68px;
+  width: 136px;
+}
+
+.gear-inner .bar:nth-child(2) {
+  transform: rotate(60deg);
+}
+
+.gear-inner .bar:nth-child(3) {
+  transform: rotate(120deg);
+}
+
+.gear-inner .bar:nth-child(4) {
+  transform: rotate(90deg);
+}
+
+.gear-inner .bar:nth-child(5) {
+  transform: rotate(30deg);
+}
+
+.gear-inner .bar:nth-child(6) {
+  transform: rotate(150deg);
+}
+
+.text {
+  position: absolute;
+  right: 30px; /* 距离右边的距离 */
+  bottom: 16px; /* 距离底部的距离 */
+  color: white; /* 文字颜色 */
+  font-size: 20px; /* 字体大小 */
+  text-align: right; /* 文字右对齐 */
+  z-index: 20; /* 确保文本在其他元素之上 */
+}
+
+@media (max-width: 600px) {
+  .text {
+    font-size: 14px; /* 在手机上调整字体大小 */
+  }
+}
+
+    </style>
+</head>
+<body>
+<div class="top-right">
+    <a href="https://github.com/icecubec/Skeuomorphic-style-blog">
+<button class="btnrr">
+  <svg width="40" height="40" fill="#0092E4" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24" id="github">
+    <path d="M12,2.2467A10.00042,10.00042,0,0,0,8.83752,21.73419c.5.08752.6875-.21247.6875-.475,0-.23749-.01251-1.025-.01251-1.86249C7,19.85919,6.35,18.78423,6.15,18.22173A3.636,3.636,0,0,0,5.125,16.8092c-.35-.1875-.85-.65-.01251-.66248A2.00117,2.00117,0,0,1,6.65,17.17169a2.13742,2.13742,0,0,0,2.91248.825A2.10376,2.10376,0,0,1,10.2,16.65923c-2.225-.25-4.55-1.11254-4.55-4.9375a3.89187,3.89187,0,0,1,1.025-2.6875,3.59373,3.59373,0,0,1,.1-2.65s.83747-.26251,2.75,1.025a9.42747,9.42747,0,0,1,5,0c1.91248-1.3,2.75-1.025,2.75-1.025a3.59323,3.59323,0,0,1,.1,2.65,3.869,3.869,0,0,1,1.025,2.6875c0,3.83747-2.33752,4.6875-4.5625,4.9375a2.36814,2.36814,0,0,1,.675,1.85c0,1.33752-.01251,2.41248-.01251,2.75,0,.26251.1875.575.6875.475A10.0053,10.0053,0,0,0,12,2.2467Z"></path>
+  </svg>
+</button>
+</a>
+</div>
+    <div id="myModal" class="modal">
+<div class="cardee">
+  <div class="headerr">
+    <span class="icon">
+      <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path clip-rule="evenodd" d="M18 3a1 1 0 00-1.447-.894L8.763 6H5a3 3 0 000 6h.28l1.771 5.316A1 1 0 008 18h1a1 1 0 001-1v-4.382l6.553 3.276A1 1 0 0018 15V3z" fill-rule="evenodd"></path>
+      </svg>
+    </span>
+    <p class="alert">公告!</p>
+  </div>
+
+  <p class="message">
+     这不是主站！http://a.thesheep.lovestoblog.com/
+  </p>
+<div style="text-align: center;">
+  <div class="actions">
+      <a class="read" id="closeButton">
+      关闭
+    </a>
+    <a class="read" id="closeButton">
+      我知道了
+    </a>
+
+    <a class="mark-as-read" id="dismissButton">
+      24小时内不再弹出
+    </a>
+  </div>
+  </div>
+</div>
+
+    </div>
+
+    <div class="container" id="content">
+        <div class="left-content">
+            <div class="circle-card" id="circle-card">
+                <a href="/">
+                <img src="https://creatorspace.imgix.net/users/cm5tl7a7y01jfre014pvpcgx1/phcNVZWIBk4tWtqg-thssheep.jpg" alt="圆形图片">
+                </a>
+            </div>
+            <br><br>
+        <div class="containerrr">
+    <div class="carddd">
+        <div class="carddd-title">TheSheep</div>
+        <div class="carddd-content" id="quote1">普普通通全栈小白(后端只会PHP...)</div>
+    </div>
+    <div class="carddd">
+        <div class="carddd-title">初生</div>
+        <div class="carddd-content" id="quote2">拟物和极简主义的狂热粉，我的<a href="https://space.bilibili.com/1813562091" target="_blank">BILIBILI</a></div>
+    </div>
+</div>
+
+            <div class="cardd">
+                    <a>
+                        <div class="card-title">每日一言</div>
+                        <div class="card-content" id="quote"></div>
+                    </a>
+                </div>
+ <div class="gearbox">
+  <div class="overlay"></div>
+  <div class="gear one">
+    <div class="gear-inner">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+  <div class="gear two">
+    <div class="gear-inner">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+  <div class="gear three">
+    <div class="gear-inner">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+  <div class="gear four large">
+    <div class="gear-inner">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </div>
+  <div class="text"><h1>文章列表</h1></div>
+</div>
+                            <div class="card">
+                    <a href="article.php?id=1">
+                        <div class="card-title">[置顶]可以注册了！</div>
+                        <div class="card-content">awa</div>
+                    </a>
+                </div>
+                            <div class="card">
+                    <a href="article.php?id=2">
+                        <div class="card-title">欢迎来到我的博客！</div>
+                        <div class="card-content">以下是关于这个网站的信息以及我</div>
+                    </a>
+                </div>
+                            <div class="card">
+                    <a href="article.php?id=3">
+                        <div class="card-title">AlightMotion下载站</div>
+                        <div class="card-content">一个简单的作品</div>
+                    </a>
+                </div>
+                    </div>
+        <div class="right-content">
+            <!-- 右侧内容保持不变 -->
+        </div>
+    </div>
+    <div class="footer">© 2025 TheSheep. 保留所有权利.</div> <!-- 版权提示 -->
+
+    <script>
+        let isRotating = false; // 控制旋转状态
+
+        document.getElementById('circle-card').addEventListener('mouseover', function() {
+            if (!isRotating) {
+                isRotating = true; // 设置为正在旋转
+                const img = this.querySelector('img');
+                img.style.transition = 'none'; // 关闭过渡效果
+                img.style.transform = 'rotate(360deg)'; // 放大图片
+                setTimeout(() => {
+                    img.style.transition = 'transform 0.6s ease'; // 恢复过渡效果
+                    img.style.transform = 'rotate(0deg)'; // 恢复原大小
+                    isRotating = false; // 旋转结束
+                }, 1000); // 旋转时间
+            }
+        });
+
+    </script>
+    <script>
+    // 获取弹窗和按钮
+    var modal = document.getElementById("myModal");
+    var closeButton = document.getElementById("closeButton");
+    var dismissButton = document.getElementById("dismissButton");
+
+    // 检查是否已设置不再弹出
+    var dismissedTime = localStorage.getItem("modalDismissedTime");
+    if (!dismissedTime || (Date.now() - dismissedTime) > 24 * 60 * 60 * 1000) {
+        modal.style.display = "block"; // 显示弹窗
+    }
+
+    // 关闭弹窗
+    closeButton.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // 点击按钮时，设置不再弹出并关闭弹窗
+    dismissButton.onclick = function() {
+        localStorage.setItem("modalDismissedTime", Date.now());
+        modal.style.display = "none";
+    }
+
+    // 点击弹窗外部关闭弹窗
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    // 关闭按钮（×）功能
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+</script>
+<script>
+        fetch('https://apis.jxcxin.cn/api/yiyan?type=json')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('quote').innerText = data.msg;
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+    
+ <ul class="custom-context-menu" id="contextMenu">
+    <li id="copy">请使用快捷键</li>
+</ul>
+
+<script>
+    const contextMenu = document.getElementById('contextMenu');
+
+    // 显示自定义右键菜单
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault(); // 阻止默认右键菜单
+        contextMenu.style.display = 'block';
+        contextMenu.style.left = e.pageX + 'px';
+        contextMenu.style.top = e.pageY + 'px';
+    });
+
+    // 隐藏自定义右键菜单
+    document.addEventListener('click', function () {
+        contextMenu.style.display = 'none';
+    });
+
+    // 复制功能
+    document.getElementById('copy').addEventListener('click', function () {
+        const textToCopy = '复制的内容'; // 你想要复制的内容
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            alert('内容已复制！');
+        }).catch(err => {
+            console.error('复制失败:', err);
+        });
+        contextMenu.style.display = 'none'; // 复制后隐藏菜单
+    });
+
+    // 粘贴功能
+    document.getElementById('paste').addEventListener('click', function () {
+        navigator.clipboard.readText().then(text => {
+            alert('粘贴的内容: ' + text);
+        }).catch(err => {
+            console.error('粘贴失败:', err);
+        });
+        contextMenu.style.display = 'none'; // 粘贴后隐藏菜单
+    });
+</script>
+<script src="http://a.thesheep.lovestoblog.com/1.js"></script>
+</body>
+</html>
